@@ -13,7 +13,7 @@ f:SetSize(64, 64)
 --f:SetAlpha(0.5)
 
 local circle = f:CreateTexture(nil, 'BACKGROUND')
-circle:SetTexture([[interface\addons\crosshairs\circle.tga]])
+circle:SetTexture([[interface/addons/crosshairs/circle]])
 circle:SetAllPoints()
 circle:SetAlpha(alpha)
 --circle:SetPoint('CENTER')
@@ -48,7 +48,7 @@ bottom:SetBlendMode('ADD')
 --]]
 
 local tx = f:CreateTexture(nil, 'BACKGROUND')
-tx:SetTexture([[interface\addons\crosshairs\arrows.tga]])
+tx:SetTexture([[interface/addons/crosshairs/arrows]])
 tx:SetAllPoints()
 --tx:SetPoint('CENTER')
 --tx:SetSize(86, 86)
@@ -174,6 +174,7 @@ function f:PLAYER_TARGET_CHANGED()
 	if nameplate then
 		targetPlate = nameplate
 		FocusPlate(nameplate)
+		--TargetLock:Show()
 	else
 		fadeOut:Play()
 		targetPlate = nil
@@ -251,9 +252,10 @@ f:RegisterEvent('PLAYER_LOGIN')
 
 function f:NAME_PLATE_UNIT_ADDED(unit)
 	local nameplate = C_NamePlate.GetNamePlateForUnit(unit)
-	if nameplate and UnitIsUnit('target', unit) and not UnitCanAssist('player', unit) then
+	if nameplate and UnitIsUnit('target', unit) then
 		targetPlate = nameplate
 		FocusPlate(nameplate)
+		--TargetLock:Show()
 	end
 end
 f:RegisterEvent('NAME_PLATE_UNIT_ADDED')

@@ -1,6 +1,6 @@
 ## Interface: 70000
 ## Author: Semlar
 ## Title: Crosshairs
-## Version: 0.1
+## Version: 0.3
 ## Notes: Animated target indicator
 Crosshairs.lua
