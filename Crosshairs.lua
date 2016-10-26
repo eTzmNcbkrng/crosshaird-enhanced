@@ -136,7 +136,7 @@ local function FocusPlate(plate)
 			x, y = x * scale, y * scale
 			local fScale = f:GetScale()
 			x, y = x / fScale, y / fScale
-			f:SetPoint('CENTER', WorldFrame, 'BOTTOMLEFT', ScaleCoords(x, y))
+			f:SetPoint('CENTER', nil, 'BOTTOMLEFT', ScaleCoords(x, y))
 		end
 		fadeIn:Play()
 	end
@@ -236,14 +236,33 @@ f:SetScript('OnUpdate', function(self, elapsed)
 			x, y = x * scale, y * scale --(y - plate:GetHeight()/2) * scale
 			local fScale = f:GetScale()
 			x, y = x / fScale, y / fScale
-			f:SetPoint('CENTER', WorldFrame, 'BOTTOMLEFT', ScaleCoords(x, y))
+			f:SetPoint('CENTER', nil, 'BOTTOMLEFT', ScaleCoords(x, y))
 		end
 	end
 end)
 
 function f:DISPLAY_SIZE_CHANGED()
-	local xRes, yRes = strmatch(({GetScreenResolutions()})[GetCurrentResolution()], '(%d+)x(%d+)')
-	xFactor, yFactor = 768 / xRes * GetMonitorAspectRatio(), 768 / yRes
+	local width, height = GetPhysicalScreenSize()
+	xFactor, yFactor = (768 / width) * (width / height), 768 / height
+	--[[
+	local currentResolution, xRes, yRes = GetCurrentResolution()
+	if currentResolution ~= 0 then
+		xRes, yRes = strmatch(({GetScreenResolutions()})[GetCurrentResolution()], '(%d+)x(%d+)')
+	else
+		xRes, yRes = strmatch(GetCVar('gxWindowedResolution'), '(%d+)x(%d+)')
+	end
+	if yRes and yRes ~= '0' then
+		xFactor, yFactor = 768 / xRes * GetMonitorAspectRatio(), 768 / yRes
+	else
+		xFactor, yFactor = 1, 1
+	end
+	--]]
+	-- GetMonitorAspectRatio() = ScreenWidth / ScreenHeight
+	-- GetCVar('gxWindowedResolution') == "1680x945" -- only updates when client is restarted
+	-- gxFullscreenResolution == "1920x1080" 
+	-- gxWindow == isWindowed?
+	-- gxMaximize == fullscreen?
+	
 end
 function f:PLAYER_LOGIN() f:DISPLAY_SIZE_CHANGED() end
 
