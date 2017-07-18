@@ -20,24 +20,36 @@ circle:SetAlpha(alpha)
 --circle:SetSize(86, 86)
 
 local left = f:CreateTexture(nil, 'BACKGROUND')
+
+--[[
 left:SetColorTexture(1, 1, 1, alpha)
 left:SetPoint('RIGHT', f, 'LEFT', 8, 0)
 left:SetSize(2000, 1)
+--]]
 
 local right = f:CreateTexture(nil, 'BACKGROUND')
+
+--[[
 right:SetColorTexture(1, 1, 1, alpha)
 right:SetPoint('LEFT', f, 'RIGHT', -8, 0)
 right:SetSize(2000, 1)
+--]]
 
 local top = f:CreateTexture(nil, 'BACKGROUND')
+
+--[[
 top:SetColorTexture(1, 1, 1, alpha)
 top:SetPoint('BOTTOM', f, 'TOP', 0, -8)
 top:SetSize(1, 2000)
+--]]
 
 local bottom = f:CreateTexture(nil, 'BACKGROUND')
+
+--[[
 bottom:SetColorTexture(1, 1, 1, alpha)
 bottom:SetPoint('TOP', f, 'BOTTOM', 0, 8)
 bottom:SetSize(1, 2000)
+--]]
 
 ---[[
 circle:SetBlendMode('ADD')
